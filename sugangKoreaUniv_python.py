@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[14]:
-
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
@@ -95,14 +89,15 @@ else:
     print('잘못된 정보')
 
 URL = 'https://sugang.korea.ac.kr/'
-# driver = webdriver.Chrome('chromedriver.exe')
 driver.get(URL)
 
 html = driver.page_source
 time.sleep(delay)
+
 # 경고메세지 없애기
 driver.switch_to_frame('Main')
 driver.find_element_by_css_selector('div.jconfirm-closeIcon').click()
+
 # 로그인
 elem = driver.find_element_by_id("id")
 elem.send_keys(id)
@@ -110,8 +105,8 @@ elem = driver.find_element_by_id("pwd")
 elem.send_keys(pwd)
 driver.find_element_by_xpath('//*[@id="btn-login"]').click()
 time.sleep(delay)
+
 # 과목조회
-# driver.find_element_by_css_selector('span.btn-more').click()
 driver.switch_to_frame('coreMain')
 driver.find_element_by_xpath('//*[@id="menu_hakbu"]').click()
 time.sleep(delay)
@@ -126,6 +121,7 @@ sel2 = driver.find_elements_by_xpath('//*[@id="pCol"]/option')
 s2 = sel2[num2]
 s2.click()
 time.sleep(1)
+
 # 엑셀 생성
 wb = Workbook()
 sel3 = driver.find_elements_by_xpath('//*[@id="pDept"]/option')
@@ -188,10 +184,6 @@ total_name = s1.text + '_' + s2.text + '_' + s3.text
 wb.remove(wb['Sheet'])
 wb.save(total_name + '.xlsx')
 wb.close
-
-
-# In[ ]:
-
 
 
 
